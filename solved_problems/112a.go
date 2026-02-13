@@ -9,6 +9,8 @@ import (
 )
 
 func solve(in *FastScanner, out *bufio.Writer) {
+	// checking make save updating content
+
 	s1 := strings.ToLower(in.NextString())
 	s2 := strings.ToLower(in.NextString())
 
