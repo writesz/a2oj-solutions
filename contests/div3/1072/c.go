@@ -7,102 +7,22 @@ import (
 	"sort"
 )
 
-func dfs(x int, k int, g map[int]int) int {
-	if x == k {
-		return 0
-	}
-	if x < k || x == 0 {
-		return -1
-	}
-
-	if v, ok := g[x]; ok {
-		return v
-	}
-
-	a := x / 2
-	b := (x + 1) / 2
-
-	left := dfs(a, k, g)
-	right := dfs(b, k, g)
-
-	res := -1
-
-	if left != -1 && right != -1 {
-		if left < right {
-			res = left + 1
-		} else {
-			res = right + 1
-		}
-	} else if left != -1 {
-		res = left + 1
-	} else if right != -1 {
-		res = right + 1
-	}
-
-	g[x] = res
-
-	return res
-}
-
-func countSteps(n int, k int, steps int) int {
-	if n == 0 || n < k {
-		return -1
-	}
-
-	if n == 1 {
-		if k == 1 {
-			return steps
-		} else {
-			return -1
-		}
-	}
-
-	if n%2 == 0 {
-		if n == k {
-			return steps
-		} else {
-			return countSteps(n/2, k, steps+1)
-		}
-	} else {
-		if n == k || n == k-1 {
-			return steps
-		} else {
-			l := countSteps(n/2, k, steps+1)
-			r := countSteps(n/2+1, k, steps+1)
-
-			if r == -1 && l == -1 {
-				return -1
-			}
-
-			if l > 0 && r > 0 {
-				return min(l, r)
-			}
-
-			if l > 0 {
-				return l
-			} else {
-				return r
-			}
-		}
-	}
-}
-
 func solve(in *FastScanner, out *bufio.Writer) {
 	testcases := in.NextInt()
 
 	for t := 0; t < testcases; t++ {
+		ans := 0
 		n := in.NextInt()
-		k := in.NextInt()
 
-		ans := -1
-
-		if k > n {
-			fmt.Println(ans)
-			continue
+		if n < 4 {
+			ans = n
 		}
-		g := make(map[int]int, 64)
-		ans = dfs(n, k, g)
 
+		if n%2 == 0 {
+			ans = 0
+		} else {
+			ans = 1
+		}
 		fmt.Println(ans)
 	}
 }
