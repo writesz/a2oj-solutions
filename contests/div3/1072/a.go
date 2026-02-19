@@ -11,32 +11,17 @@ func solve(in *FastScanner, out *bufio.Writer) {
 	testcases := in.NextInt()
 
 	for t := 0; t < testcases; t++ {
+		ans := 0
 		n := in.NextInt()
-		k := in.NextInt()
 
-		counter := 0
-		ans := -1
-		for {
-			if n <= 1 {
-				break
-			}
-
-			nn := n / 2
-			counter++
-
+		if n < 4 {
+			ans = n
+		} else {
 			if n%2 == 0 {
-				if nn == k {
-					ans = counter
-					break
-				}
+				ans = 0
 			} else {
-				if nn == k || nn+1 == k {
-					ans = counter
-					break
-				}
+				ans = 1
 			}
-
-			n = nn
 		}
 
 		fmt.Println(ans)
