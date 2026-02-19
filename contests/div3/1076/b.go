@@ -23,7 +23,7 @@ func solve(in *FastScanner, out *bufio.Writer) {
 
 			if p[i] != currentG {
 				// reverse from i to find greatest
-				j := i + 1
+				j := i
 				for ; j <= n; j++ {
 					if p[j] == currentG {
 						break
@@ -33,6 +33,7 @@ func solve(in *FastScanner, out *bufio.Writer) {
 				for ; i < j; i, j = i+1, j-1 {
 					p[i], p[j] = p[j], p[i]
 				}
+				break
 			}
 		}
 
