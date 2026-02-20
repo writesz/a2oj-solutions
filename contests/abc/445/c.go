@@ -19,30 +19,16 @@ func abs(a, b int) int {
 
 func solve(in *FastScanner, out *bufio.Writer) {
 	n := in.NextInt()
+	same := true
+	a := n % 10
+	n = n
+	for {
+		b := n % 10
+		n = n / 10
 
-	v := make([]int, n+1)
-	marked := make([]int, n+1)
-
-	for i := 1; i <= n; i++ {
-		v[i] = in.NextInt()
-	}
-
-	//11 3 10 7 15 10 10 11 11 13 11 12 14 14 15
-	// 1  2 3 4  5  6  7  8  9 10 11 12 13 14 15
-
-	for i := 1; i <= n; i++ {
-		source := v[i]
-		for source != v[source] {
-			if marked[source] != 0 {
-				source = marked[source]
-				break
-			}
-
-			dest := v[source]
-			source = dest
+		if a != b {
+			same = false
 		}
-		marked[i] = source
-		fmt.Printf("%d ", source)
 	}
 
 	fmt.Println()
