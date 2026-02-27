@@ -1,7 +1,10 @@
 // znnr competitive programming journey
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <stack>
 
 using namespace std;
 
@@ -9,36 +12,40 @@ using ll  = long long;
 using pii = pair<int,int>;
 using vi  = vector<int>;
 
-long long C3(long long n) {
-    if (n < 3) return 0;
-    return n * (n - 1) * (n - 2) / 6;
-}
-
 void solve() {
-    int n, m;
-    cin >> n >> m;
+    int n; 
+    cin >> n;
 
-    vector<int> r(n + 1);
+    string s;
+    cin >> s;
 
-    while (m--) {
-        int r1, r2;
-        cin >> r1 >> r2;
+    stack<char> st;
 
-        r[r1]++;
-        r[r2]++;
+    for (int i = 0; i < s.size(); i++) {
+        if (!st.empty()) {
+            char c = st.top();
+            if (s[i] == c) {
+                st.pop();
+                continue;
+            }
+        }
+
+        st.push(s[i]);
+
     }
 
-    for (int i = 1; i <= n; i++) {
-        cout << C3(n-1 -r[i]) << " ";
+    if (st.empty()) {
+        cout << "yes" << endl;
+    } else {
+        cout << "no" << endl;
     }
-    cout << endl;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
